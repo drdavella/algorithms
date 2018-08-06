@@ -19,10 +19,14 @@ def partition(array, pividx):
 
 def quicksort(array):
     if len(array) < 2:
-        return
+        return 0
 
+    a = 0
+    b = 0
     pividx = len(array) // 2
     pividx = partition(array, pividx)
     if pividx < len(array):
-        quicksort(array[:pividx])
-        quicksort(array[pividx+1:])
+        a = quicksort(array[:pividx])
+        b = quicksort(array[pividx+1:])
+
+    return a + b + len(array) - 1
