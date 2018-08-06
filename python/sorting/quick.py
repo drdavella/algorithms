@@ -17,13 +17,36 @@ def partition(array, pividx):
     return i-1
 
 
+def median_idx(array):
+
+    idx_map = {}
+    num = len(array)
+
+    first = array[0]
+    idx_map[first] = 0
+
+    mid = array[num//2] if num % 2 == 0 else array[num//2 - 1]
+    if num % 2 == 0:
+        mid = array[num//2 - 1]
+        idx_map[mid] = num//2 - 1
+    else:
+        mid = array[num//2]
+        idx_map[mid] = num//2
+
+    last = array[-1]
+    idx_map[last] = len(array) - 1
+
+    return idx_map[sorted([first, mid, last])[1]]
+
+
 def quicksort(array):
     if len(array) < 2:
         return 0
 
     a = 0
     b = 0
-    pividx = len(array) // 2
+
+    pividx = median_idx(array)
     pividx = partition(array, pividx)
     if pividx < len(array):
         a = quicksort(array[:pividx])
